@@ -1,0 +1,48 @@
+*.py[cod]
+__pycache__
+.cache
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.cache
+.coverage
+.tox
+htmlcov
+.pytest.xml
+
+# si
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+prof
+*.swp
+
+celerybeat-schedule
+celerybeat.pid
+*.backup
+
+.idea
+junit.xml
+staticfiles
+.env*
