@@ -26,6 +26,9 @@ class Dev(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'rest_framework',
+        'drf_yasg',
+        'notes.apps.NotesConfig',
     ]
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
@@ -67,6 +70,21 @@ class Dev(Configuration):
     STATIC_URL = '/static/'
 
     INTERNAL_IPS = ['127.0.0.1', 'localhost']
+
+    PASSWORD_HASHERS = [
+        'django.contrib.auth.hashers.MD5PasswordHasher',
+    ]
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.IsAuthenticated',
+        ),
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+        )
+    }
+    JWT_AUTH = v.DictValue()
 
 
 class Prod(Dev):

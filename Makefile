@@ -24,7 +24,7 @@ lint-changes:
 	flake8 $$(git status -s | grep -E '\.py$$' | cut -c 4-)
 
 test .coverage:
-	pytest --cov-report=term:skip-covered --cov-fail-under=100 --cov=.
+	pytest --migrations --create-db --cov-report=term:skip-covered --cov-fail-under=100 --cov=.
 
 cov: .coverage
 	@coverage report --skip-covered

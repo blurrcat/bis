@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3.6
+      - image: postgres:10-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: bis
+          POSTGRES_PASSWORD: ""
+    workdir: ~/bis
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1
+      - run: |
+          python3 -m venv ~/venv
+          . ~/venv/bin/activate
+          make install ENV=test
+          mkdir -p ~/artifacts
+      - run: |
+          . ~/venv/bin/activate
+          make clean test PYTEST_ADDOPTS="--junit-xml=~/artifacts/junit.xml"
+      - save_cache:
+          key: v1
+          paths:
+            - "~/.cache/pip"
+            - "~/venv"
+      - store_test_results:
+          path: ~/artifacts
+      - store_artifacts:
+          path: ~/artifacts
